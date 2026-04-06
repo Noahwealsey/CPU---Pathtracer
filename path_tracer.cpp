@@ -48,7 +48,7 @@ std::vector<Sphere> spheres = {
     Sphere(Vec3(0, 0, -1),      0.5,   Vec3(0,0,0),   Vec3(0.8,0.2,0.2)), // red ball
     Sphere(Vec3(1, 0, -1),      0.5,   Vec3(0,0,0),   Vec3(0.2,0.8,0.2)), // green ball
     Sphere(Vec3(-1, 0, -1),     0.5,   Vec3(0,0,0),   Vec3(0.2,0.2,0.8)), // blue ball
-    Sphere(Vec3(0, -1.5, -1),   0.75,   Vec3(13,12,12), Vec3(0.6,0.6,0.6))       // bright white light
+    Sphere(Vec3(0, 2.0, -1),   0.25,   Vec3(12,12,12), Vec3(0.5,0.8,0.7))       // bright white light
 };
 
 std::mt19937 rng(std::random_device{}());                  //random gen. 
@@ -138,7 +138,7 @@ Vec3 trace(const Ray& ray, int depth = 0){
 int main(){
 	int width = 1280;
 	int height = 720;
-	int samples = 128;
+	int samples = 256;
 
 	std::vector<Vec3> image(width*height);
 	for(int j = 0; j < height; j++){
@@ -155,8 +155,8 @@ int main(){
 				double px = (2.0 * u - 1.0) * aspect;
 				double py = (1.0 - 2.0 * v);  
 
-				Vec3 cam_dir = Vec3(px, py, -0.3).normalize();
-				Ray new_ray(Vec3(0, 0, 0), cam_dir);
+				Vec3 cam_dir = Vec3(px, py, -1.0).normalize();
+				Ray new_ray(Vec3(0, 0, 2.0), cam_dir);
 
 				col+= trace(new_ray);
 			}
